@@ -2,6 +2,46 @@ extends ../layout
 
 block content
   h2 Twitter to Bitcoin Address
+
+  table.table
+    tr
+      th Twitter Name
+      th Bitcoin Address
+      th Proof URL
+      th Actions
+    each map, i in maps
+      tr
+        td= map.mapfrom.address
+        td= map.mapto.address
+        td
+          a(href="#") Link to Proof
+        td
+          a(href="/twitter/view/" + map.mapfrom.address)
+            button.btn.btn-xs.btn-primary
+              | Details 
+          |         
+          a(href="bitcoin:" + map.mapto.address)
+            button.btn.btn-xs.btn-success
+              | Pay 
+          | 
+          a(href="#" + map._id)
+            button.btn.btn-xs.btn-danger
+              | Delete
+
+    form(method="POST",action="/twitter/new")
+      input(type='hidden', name='_csrf', value=token)
+      tr
+        td 
+          input.form-control(type='text', name='twitter', id='twitter', placeholder='TwitterId (no @ sign needed)')
+        td
+          input.form-control(type='text', name='bitcoinaddress', id='bitcoinaddress', placeholder='Bitcoin Wallet Address')
+        td
+          input.form-control(type='text', name='proofurl', id='proofurl', placeholder='Link to Proof URL')        
+        td
+          button.btn.btn-sm.btn-primary
+            | Add New Mapping
+
+
   a(href="/twitter/new")
     button.btn.btn-success
      | Add new address  

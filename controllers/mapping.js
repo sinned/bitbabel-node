@@ -12,9 +12,14 @@ var secrets = require('../config/secrets');
  * Show latest twitter maps.
  */
 exports.getTwitter = function(req, res) {
-  res.render('map/twitter', {
-    title: 'Twitter'
-  });
+  var maps = [];
+  Mapping.find(function (err, maps) {
+    console.log('found maps: ', maps);
+    res.render('map/twitter', {
+      title: 'Twitter',
+      maps: maps
+    });
+  })
 };
 
 /**
@@ -32,8 +37,19 @@ exports.getNewmap = function(req, res) {
  * Create Map 
  */
 exports.postNewmap = function(req, res) {
-  req.flash('success', { msg: 'Wallet address mapped.' });
-  res.render('map/new-twitter', {
-    title: 'New Twitter Map'
+  var map = new Mapping({
+    mapfrom: {
+      maptype: 'twitter',
+      address: req.body.twitter
+    },
+    mapto: {
+      maptype: 'bitcoin',
+      address: req.body.bitcoinaddress
+    }
   });
+  map.save();
+  //console.log(map);
+  
+  req.flash('success', { msg: 'Wallet address mapped. ' });
+  res.redirect('/twitter');
 };
