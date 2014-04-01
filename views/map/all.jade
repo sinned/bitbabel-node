@@ -1,16 +1,18 @@
 extends ../layout
 
 block content
-  h2 Twitter to Bitcoin Address
+  h2 All Maps to Bitcoin Address
 
   table.table
     tr
-      th Twitter Name
-      th Bitcoin Address
+      th Map Type
+      th From Address
+      th Wallet Address
       th Proof URL
       th Actions
     each map, i in maps
       tr
+        td= map.mapfrom.maptype
         td= map.mapfrom.address
         td= map.mapto.address
         td
@@ -32,6 +34,13 @@ block content
     form(method="POST",action="/twitter/new")
       input(type='hidden', name='_csrf', value=token)
       tr
+        td
+          label.sr-only(for="maptype") Twitter ID
+          select.form-control(name='maptype', id='maptype')      
+            option Twitter
+            option Facebook
+            option Email
+            option SMS  
         td
           label.sr-only(for="twitter") Twitter ID
           input.form-control(type='text', name='twitter', id='twitter', placeholder='TwitterId (no @ sign needed)')

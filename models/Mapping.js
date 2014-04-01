@@ -29,6 +29,7 @@ var mapSchema = new mongoose.Schema({
 
   // has this been verified
   verified: { type: Boolean, default: false },
+  verifystring: String,
 
   created: { type: Date, default: Date.now },
   modified: { type: Date, default: Date.now }

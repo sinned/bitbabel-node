@@ -6,6 +6,21 @@ var passport = require('passport');
 var Mapping = require('../models/Mapping');
 var secrets = require('../config/secrets');
 
+/**
+ * GET /all
+ * Show latest maps.
+ */
+exports.getAll = function(req, res) {
+  var maps = [];
+  Mapping.find(function (err, maps) {
+    console.log('found maps: ', maps);
+    res.render('map/all', {
+      title: 'All Maps',
+      maps: maps
+    });
+  })
+};
+
 
 /**
  * GET /twitter
@@ -49,7 +64,7 @@ exports.postNewmap = function(req, res) {
   });
   map.save();
   //console.log(map);
-  
+
   req.flash('success', { msg: 'Wallet address mapped. ' });
   res.redirect('/twitter');
 };
