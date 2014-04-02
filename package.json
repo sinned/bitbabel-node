@@ -49,5 +49,9 @@
     "mocha": "~1.18.2",
     "chai": "~1.9.1",
     "supertest": "~0.10.0"
+  },
+  "repository":   { 
+    "type" : "git",
+    "url" : "https://github.com/sinned/bitbabel-node.git"
   }
 }
