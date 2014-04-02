@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  h2 All Maps to Bitcoin Address
+  h2 All Maps
 
   table.table
     tr
@@ -12,12 +12,14 @@ block content
       th Actions
     each map, i in maps
       tr
-        td= map.mapfrom[0].maptype
-        td= map.mapfrom[0].address
+        td 
+          a(href="/" +map.mapfrom.maptype+ "/" )= map.mapfrom.maptype
+        td
+          a(href="/" +map.mapfrom.maptype+ "/" + map.mapfrom.address + "/")= map.mapfrom.address
         td= map.mapto.maptype 
         td= map.mapto.address
         td
-          a(href="/" +map.mapfrom[0].maptype+ "/view/" + map.mapfrom[0].address)
+          a(href="/" +map.mapfrom.maptype+ "/" + map.mapfrom.address)
             button.btn.btn-xs.btn-primary
               | Details 
           |         

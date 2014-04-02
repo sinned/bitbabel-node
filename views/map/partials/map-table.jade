@@ -1,0 +1,22 @@
+table.table
+  tr
+    th From Address
+    th Wallet Address
+    th Actions
+  each map, i in maps
+    tr
+      td
+        a(href="/" +map.mapfrom.maptype+ "/" + map.mapfrom.address)= map.mapfrom.address
+      td= map.mapto.maptype + ":" + map.mapto.address
+      td
+        a(href="#" + map._id)
+          button.btn.btn-xs.btn-primary
+            | Details     
+        |     
+        a(href=map.mapto.maptype + map.mapto.address)
+          button.btn.btn-xs.btn-success
+            | Pay 
+        | 
+        a(href="#" + map._id)
+          button.btn.btn-xs.btn-danger
+            | Delete
