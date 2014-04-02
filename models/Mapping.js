@@ -6,13 +6,21 @@ var mapSchema = new mongoose.Schema({
   name: String, // pretty formatted name, like "Dennis Yang",
   image_url: String, 
 
-  mapfrom: {
+  mapfrom: [{
     maptype: {
       type: String,
       enum: ['twitter', 'facebook', 'email', 'sms', 'website']
     },
-    address: String // remove the '@' from the front of twitter addresses
-  },
+    address: String, 
+
+    proof: {
+      url: String, // the URL of the public "proof" of the mapping ie. https://twitter.com/jimmy_wales/status/441634501265862657
+      last_checked: { type: Date, default: Date.now },
+    },    
+    // has this been verified
+    verified: { type: Boolean, default: false },
+    verifystring: String,    
+  }],
 
   // wallet addresses to map to
   mapto: {
@@ -20,17 +28,13 @@ var mapSchema = new mongoose.Schema({
       type: String,
       enum: ['bitcoin', 'dogecoin', 'litecoin']
     },
-    address: String
+    address: String,
+    hashcheck: String // SHA256 (address+salt) 
   },
 
-  proof: {
-    url: String, // the URL of the public "proof" of the mapping ie. https://twitter.com/jimmy_wales/status/441634501265862657
-    last_checked: { type: Date, default: Date.now },
-  },
 
-  // has this been verified
-  verified: { type: Boolean, default: false },
-  verifystring: String,
+
+
 
   created: { type: Date, default: Date.now },
   modified: { type: Date, default: Date.now }

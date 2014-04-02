@@ -4,7 +4,7 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
-var secrets = require('../config/secrets');
+var secrets = process.env.NODE_ENV == 'local' ? require('../config/secrets-local') : require('../config/secrets');
 
 /**
  * GET /login
