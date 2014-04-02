@@ -18,7 +18,7 @@ var mapSchema = new Schema({
 
     proof: {
       url: String, // the URL of the public "proof" of the mapping ie. https://twitter.com/jimmy_wales/status/441634501265862657
-      last_checked: { type: Date, default: Date.now },
+      last_checked: { type: Date },
     },    
     // has this been verified
     verified: { type: Boolean, default: false },
