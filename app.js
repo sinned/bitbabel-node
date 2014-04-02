@@ -26,7 +26,7 @@ var mappingController = require('./controllers/mapping');
  * API keys + Passport configuration.
  */
 
-var secrets = process.env.NODE_ENV == 'production' ? require('./config/secrets') : require('./config/secrets-local');
+var secrets = process.env.NODE_ENV == 'local' ? require('./config/secrets-local') : require('./config/secrets');
 var passportConf = require('./config/passport');
 
 /**
