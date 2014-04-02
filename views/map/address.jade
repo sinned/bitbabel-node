@@ -1,13 +1,29 @@
 extends ../layout
 
 block content
-  h2 
-    if (address)
-      | Wallet Mappings for #{maptype}: #{address}
-    else
-      | #{maptype} to Wallet Address
+  h2
+    | Wallet Mappings for #{maptype}: #{address}
 
-  include partials/map-table
+
+  table.table
+    tr
+      th Wallet Address
+      th Actions
+    each map, i in maps
+      tr
+        td= map.mapto.maptype + ":" + map.mapto.address
+        td
+          a(href="#" + map._id)
+            button.btn.btn-xs.btn-primary
+              | Details     
+          |     
+          a(href=map.mapto.maptype + map.mapto.address)
+            button.btn.btn-xs.btn-success
+              | Pay 
+          | 
+          a(href="#" + map._id)
+            button.btn.btn-xs.btn-danger
+              | Delete
 
   a(href="/maps/new")
     button.btn.btn-success

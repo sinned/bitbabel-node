@@ -71,7 +71,7 @@ exports.getMap = function(req, res) {
 
   Mapping.find({ 'mapfrom.maptype': req.params.maptype, state: 'published' }, function (err, maps) {
     //console.log('found maps: ', maps);
-    res.render('map/address', {
+    res.render('map/maptype', {
       title: req.params.maptype,
       maps: maps,
       maptype: req.params.maptype
@@ -97,6 +97,10 @@ exports.getAddress = function(req, res) {
   })
 };
 
+/**
+ * GET /:maptype/:address/json
+ * Show JSON detail for single address
+ */
 exports.getAddressJSON = function(req, res) {
   var maps = [];
   Mapping.find({ 'mapfrom.maptype': req.params.maptype, 'mapfrom.address': req.params.address, state: 'published' }, function (err, maps) {

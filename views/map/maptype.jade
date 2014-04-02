@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+  h2 
+    | #{maptype} to Wallet Address
+
+  include partials/map-table
+
+  a(href="/maps/new")
+    button.btn.btn-success
+     | Add new address  
