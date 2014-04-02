@@ -3,12 +3,13 @@ var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 
 var mapSchema = new mongoose.Schema({
-  name: String, // pretty formatted name, like "Dennis Yang"
+  name: String, // pretty formatted name, like "Dennis Yang",
+  image_url: String, 
 
   mapfrom: {
     maptype: {
       type: String,
-      enum: ['twitter', 'facebook', 'email', 'sms']
+      enum: ['twitter', 'facebook', 'email', 'sms', 'website']
     },
     address: String // remove the '@' from the front of twitter addresses
   },

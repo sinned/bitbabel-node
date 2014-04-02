@@ -1,6 +1,7 @@
 /**
  * Module dependencies.
  */
+console.log('Starting up bitbabel-node (' + process.env.NODE_ENV + ')');
 
 var express = require('express');
 var MongoStore = require('connect-mongo')(express);
@@ -25,7 +26,7 @@ var mappingController = require('./controllers/mapping');
  * API keys + Passport configuration.
  */
 
-var secrets = require('./config/secrets');
+var secrets = process.env.NODE_ENV == 'production' ? require('./config/secrets') : require('./config/secrets-local');
 var passportConf = require('./config/passport');
 
 /**

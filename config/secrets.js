@@ -6,8 +6,8 @@ module.exports = {
   localAuth: true,
 
   mailgun: {
-    login: process.env.MAILGUN_LOGIN || 'postmaster@mg.bitbabel.com',
-    password: process.env.MAILGUN_PASSWORD || 'ellie1m'
+    login: process.env.MAILGUN_LOGIN || '',
+    password: process.env.MAILGUN_PASSWORD || ''
   },
 
   sendgrid: {
@@ -42,8 +42,8 @@ module.exports = {
 
   twitterAuth: true,
   twitter: {
-    consumerKey: process.env.TWITTER_KEY || 'TFBie3NMS2syXQo2nOuM9ISjJ',
-    consumerSecret: process.env.TWITTER_SECRET  || 'QNJzTEOlo0Oo09TQc7Sm4Zpzj2aeuYCfvyyCCGhzHZ5HUlVKD0',
+    consumerKey: process.env.TWITTER_KEY || 'Twitter Key',
+    consumerSecret: process.env.TWITTER_SECRET  || 'Twitter Secret',
     callbackURL: '/auth/twitter/callback',
     passReqToCallback: true
   },
@@ -70,8 +70,8 @@ module.exports = {
   },
 
   twilio: {
-    sid: process.env.TWILIO_SID || 'Your Twilio SID',
-    token: process.env.TWILIO_TOKEN || 'Your Twilio token'
+    sid: process.env.TWILIO_SID || 'Twilio SID',
+    token: process.env.TWILIO_TOKEN || 'Twilio Token'
   },
 
   clockwork: {
