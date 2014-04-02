@@ -142,11 +142,13 @@ app.get('/api/venmo', passportConf.isAuthenticated, passportConf.isAuthorized, a
 app.post('/api/venmo', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.postVenmo);
 app.get('/api/linkedin', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getLinkedin);
 
-app.get('/all', mappingController.getAll);
+app.get('/maps', mappingController.getMaps);
+app.get('/maps/new', mappingController.getNewmap);
+app.post('/maps/new', mappingController.postNewmap);
 
 app.get('/twitter', mappingController.getTwitter);
-app.get('/twitter/new', mappingController.getNewmap);
-app.post('/twitter/new', mappingController.postNewmap);
+app.get('/twitter/new', mappingController.getNewTwittermap);
+app.post('/twitter/new', mappingController.postNewTwittermap);
 
 
 app.get('/moo', function (req, res) {

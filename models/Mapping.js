@@ -31,11 +31,7 @@ var mapSchema = new mongoose.Schema({
     address: String,
     hashcheck: String // SHA256 (address+salt) 
   },
-
-
-
-
-
+  
   created: { type: Date, default: Date.now },
   modified: { type: Date, default: Date.now }
 

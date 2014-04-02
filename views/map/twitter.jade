@@ -11,13 +11,13 @@ block content
       th Actions
     each map, i in maps
       tr
-        td= map.mapfrom.address
+        td= map.mapfrom[0].address
         td= map.mapto.address
         td
-          if (map.proof.url)
+          if (map.mapfrom[0].proof.url)
             a(href="#") Link to Proof
         td
-          a(href="/twitter/view/" + map.mapfrom.address)
+          a(href="/twitter/view/" + map.mapfrom[0].address)
             button.btn.btn-xs.btn-primary
               | Details 
           |         
@@ -28,23 +28,6 @@ block content
           a(href="#" + map._id)
             button.btn.btn-xs.btn-danger
               | Delete
-
-    form(method="POST",action="/twitter/new")
-      input(type='hidden', name='_csrf', value=token)
-      tr
-        td
-          label.sr-only(for="twitter") Twitter ID
-          input.form-control(type='text', name='twitter', id='twitter', placeholder='TwitterId (no @ sign needed)')
-        td
-          label.sr-only(for="bitcoinaddress") Bitcoin Address
-          input.form-control(type='text', name='bitcoinaddress', id='bitcoinaddress', placeholder='Bitcoin Wallet Address')
-        td
-          label.sr-only(for="proofurl") Proof URL
-          input.form-control(type='text', name='proofurl', id='proofurl', placeholder='Link to Proof URL')        
-        td
-          button.btn.btn-sm.btn-primary
-            | Add New Mapping
-
 
   a(href="/twitter/new")
     button.btn.btn-success

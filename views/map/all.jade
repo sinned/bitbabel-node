@@ -7,23 +7,21 @@ block content
     tr
       th Map Type
       th From Address
+      th Wallet Type
       th Wallet Address
-      th Proof URL
       th Actions
     each map, i in maps
       tr
-        td= map.mapfrom.maptype
-        td= map.mapfrom.address
+        td= map.mapfrom[0].maptype
+        td= map.mapfrom[0].address
+        td= map.mapto.maptype 
         td= map.mapto.address
         td
-          if (map.proof.url)
-            a(href="#") Link to Proof
-        td
-          a(href="/twitter/view/" + map.mapfrom.address)
+          a(href="/" +map.mapfrom[0].maptype+ "/view/" + map.mapfrom[0].address)
             button.btn.btn-xs.btn-primary
               | Details 
           |         
-          a(href="bitcoin:" + map.mapto.address)
+          a(href=map.mapto.maptype+ ":" + map.mapto.address)
             button.btn.btn-xs.btn-success
               | Pay 
           | 
@@ -31,30 +29,34 @@ block content
             button.btn.btn-xs.btn-danger
               | Delete
 
-    form(method="POST",action="/twitter/new")
+    form(method="POST",action="/maps/new")
       input(type='hidden', name='_csrf', value=token)
       tr
         td
-          label.sr-only(for="maptype") Twitter ID
-          select.form-control(name='maptype', id='maptype')      
+          label.sr-only(for="mapfromtype") Map From Type
+          select.form-control(name='mapfromtype', id='mapfromtype')      
             option Twitter
             option Facebook
             option Email
             option SMS  
+            option Website
         td
-          label.sr-only(for="twitter") Twitter ID
-          input.form-control(type='text', name='twitter', id='twitter', placeholder='TwitterId (no @ sign needed)')
+          label.sr-only(for="mapfromaddress") From Address
+          input.form-control(type='text', name='mapfromaddress', id='mapfromaddress', placeholder='From Address')
         td
-          label.sr-only(for="bitcoinaddress") Bitcoin Address
-          input.form-control(type='text', name='bitcoinaddress', id='bitcoinaddress', placeholder='Bitcoin Wallet Address')
-        td
-          label.sr-only(for="proofurl") Proof URL
-          input.form-control(type='text', name='proofurl', id='proofurl', placeholder='Link to Proof URL')        
+          label.sr-only(for="maptotype") Wallet Type                
+          select.form-control(name='maptotype', id='maptotype')
+            option Bitcoin
+            option Dogecoin
+            option Litecoin     
+        td        
+          label.sr-only(for="maptoaddress") Wallet Address        
+          input.form-control(type='text', name='maptoaddress', id='maptoaddress', placeholder='Wallet Address')     
         td
           button.btn.btn-sm.btn-primary
             | Add New Mapping
 
 
-  a(href="/twitter/new")
+  a(href="/maps/new")
     button.btn.btn-success
      | Add new address  
