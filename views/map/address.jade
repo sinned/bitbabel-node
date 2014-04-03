@@ -11,7 +11,9 @@ block content
       th Actions
     each map, i in maps
       tr
-        td= map.mapto.maptype + ":" + map.mapto.address
+        td
+          +currencysymbol(map.mapto.maptype)
+          | #{map.mapto.maptype}:#{map.mapto.address}
         td
           a(href="#" + map._id)
             button.btn.btn-xs.btn-primary
