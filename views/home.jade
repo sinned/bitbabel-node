@@ -1,15 +1,21 @@
 extends layout
 
-block content
+block splash
   div.splash
-    h1 BitBabel - Your Crytocurrency Address DNS
-    p.lead
-      | Addresses are hard to remember.
-      br
-      | All you need is to map a Twitter ID, Email, or Phone Number to a bitcoin, dogecoin or litecoin address. Easy!
+    div.container
+      div.row
+        h1 BitBabel - Your Crytocurrency Address DNS
+        p.lead
+          | Addresses are hard to remember.
+          br
+          | All you need is to map a Twitter ID, Email, or Phone Number to a bitcoin, dogecoin or litecoin address. Easy!
 
-  div
-    p
-      a(href="/maps/new")
-        button.btn.btn-success
-         | Add a new Address Mapping  
+
+block content
+
+  div.container
+    div.row
+      p
+        a(href="/maps/new")
+          button.btn.btn-success
+           | Add a new Address Mapping  
