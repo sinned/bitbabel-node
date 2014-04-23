@@ -157,6 +157,7 @@ passport.use(new GitHubStrategy(secrets.github, function(req, accessToken, refre
  */
 
 passport.use(new TwitterStrategy(secrets.twitter, function(req, accessToken, tokenSecret, profile, done) {
+  console.log('checking twitter');
   if (req.user) {
     User.findOne({ twitter: profile.id }, function(err, existingUser) {
       if (existingUser) {
@@ -164,6 +165,7 @@ passport.use(new TwitterStrategy(secrets.twitter, function(req, accessToken, tok
         done(err);
       } else {
         User.findById(req.user.id, function(err, user) {
+          console.log('in the twitter');
           user.twitter = profile.id;
           user.tokens.push({ kind: 'twitter', accessToken: accessToken, tokenSecret: tokenSecret });
           user.profile.name = user.profile.name || profile.displayName;
@@ -184,7 +186,7 @@ passport.use(new TwitterStrategy(secrets.twitter, function(req, accessToken, tok
       // Twitter will not provide an email address.  Period.
       // But a person’s twitter username is guaranteed to be unique
       // so we can "fake" a twitter email address as follows:
-      user.email = profile.username + "@twitter.com";
+      user.email = '';
       user.twitter = profile.id;
       user.tokens.push({ kind: 'twitter', accessToken: accessToken, tokenSecret: tokenSecret });
       user.profile.name = profile.displayName;

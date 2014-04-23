@@ -1,6 +1,46 @@
 extends ../layout
 
 block content
+  if user && typeof(user.twitter) != 'undefined' && user.twitter
+
+    form.form-horizontal(id='inline-map-form-verified', method='POST')
+      input(type='hidden', name='_csrf', value=token)
+      input(type='hidden', name='mapverified', value='true')
+      input(type='hidden', name='mapfromtype', value='twitter')
+
+      legend Create a VERIFIED TWITTER address mapping
+      .form-group
+        label.col-sm-3.control-label(for='mapfromtype') Map From Type
+        .col-sm-7
+          | Twitter
+
+      .form-group
+        label.col-sm-3.control-label(for='mapfromaddress') Address
+        .col-sm-7
+          input.form-control(type='text', name='mapfromaddress', id='mapfromaddress', placeholder='From Address', value=user.twitter)
+
+      .col-sm-3.control-label 
+      .col-sm-7 
+        p 
+          b To
+
+      .form-group
+        label.col-sm-3.control-label(for='maptotype') Map To Type
+        .col-sm-7
+          select.form-control(name='maptotype', id='maptotype', autofocus)
+            option Bitcoin
+            option Dogecoin
+            option Litecoin     
+      .form-group
+        label.col-sm-3.control-label(for='maptoaddress') Wallet Address
+        .col-sm-7
+          input.form-control(type='text', name='maptoaddress', id='maptoaddress', placeholder='Wallet Address')
+      .form-group
+        .col-sm-offset-3.col-sm-7
+          button.btn.btn-success(type='submit')
+            i.fa.fa-check
+            | Create Mapping
+
   form.form-horizontal(id='inline-map-form', method='POST')
     input(type='hidden', name='_csrf', value=token)
     legend Create a new address mapping
@@ -46,10 +86,3 @@ block content
         button.btn.btn-success(type='submit')
           i.fa.fa-check
           | Create Mapping
-
-  .div
-    p Hello
-    if user && typeof(user.twitter) != 'undefined' && user.twitter
-      p= user.twitter
-    else 
-    p= user

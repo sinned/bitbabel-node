@@ -5,6 +5,7 @@ var nodemailer = require('nodemailer');
 var passport = require('passport');
 var Mapping = require('../models/Mapping');
 var secrets = process.env.NODE_ENV == 'local' ? require('../config/secrets-local') : require('../config/secrets');
+var Twit = require('twit');
 
 /**
  * GET /all
@@ -26,6 +27,11 @@ exports.getMaps= function(req, res) {
  * Start the create Map process
  */
 exports.getNewmap = function(req, res) {
+
+  if (res.locals.user && res.locals.user.twitter) {
+    console.log(res.locals.user.twitter);
+  }
+
   res.render('map/new', {
     title: 'New Map'
   });
@@ -47,18 +53,63 @@ exports.postNewmap = function(req, res) {
       address: req.body.maptoaddress
     }
   });
-  map.save(function (err, map, numberAffected) {
-    if (err) {
-      console.log('Error in map save', err);
-      req.flash('errors', { msg: 'ERROR. Save did not work.' });
-      res.render('map/new', {
-        title: 'New Map'
-      });      
-    } else {
-      req.flash('success', { msg: 'Yay! Wallet address mapped. ' });
-      res.redirect('/maps');      
-    }
-  });
+
+  console.log(req.body);
+
+  // if it's a verified mapping for twitter, get the id from the API
+  if (req.body.mapverified && res.locals.user && res.locals.user.twitter) {
+    
+    console.log('Creating Verified Mapping');
+
+    var token = _.findWhere(req.user.tokens, { kind: 'twitter' });
+    var T = new Twit({
+      consumer_key: secrets.twitter.consumerKey,
+      consumer_secret: secrets.twitter.consumerSecret,
+      access_token: token.accessToken,
+      access_token_secret: token.tokenSecret
+    });
+
+    T.get('account/verify_credentials', { }, function(err, reply) {
+      if (err) {
+        console.log('Error in map save', err);
+        req.flash('errors', { msg: 'ERROR. Save did not work.' });
+        res.render('map/new', {
+          title: 'New Map'
+        });            
+      } else {
+        map.mapfrom.address = reply.screen_name;
+        map.mapfrom.verified = true;
+        map.mapfrom.proof.type = 'oauth';
+        map.save(function (err, map, numberAffected) {
+          if (err) {
+            console.log('Error in map save', err);
+            req.flash('errors', { msg: 'ERROR. Save did not work.' });
+            res.render('map/new', {
+              title: 'New Map'
+            });      
+          } else {
+            req.flash('success', { msg: 'Yay! Wallet address mapped. ' });
+            res.redirect('/maps');      
+          }
+        });           
+      }
+    });
+
+  } else {
+    
+    map.save(function (err, map, numberAffected) {
+      if (err) {
+        console.log('Error in map save', err);
+        req.flash('errors', { msg: 'ERROR. Save did not work.' });
+        res.render('map/new', {
+          title: 'New Map'
+        });      
+      } else {
+        req.flash('success', { msg: 'Yay! Wallet address mapped. ' });
+        res.redirect('/maps');      
+      }
+    });    
+  }
 };
 
 

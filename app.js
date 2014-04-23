@@ -148,9 +148,9 @@ app.get('/maps', mappingController.getMaps);
 app.get('/maps/new', mappingController.getNewmap);
 app.post('/maps/new', mappingController.postNewmap);
 
-//app.get('/:maptype', mappingController.getMap);
-//app.get('/:maptype/:address', mappingController.getAddress);
-//app.get('/:maptype/:address/json', mappingController.getAddressJSON);
+app.get('/map/:maptype', mappingController.getMap);
+app.get('/map/:maptype/:address', mappingController.getAddress);
+app.get('/map/:maptype/:address/json', mappingController.getAddressJSON);
 
 /**
  * OAuth routes for sign-in.

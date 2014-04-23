@@ -13,16 +13,16 @@ block content
     each map, i in maps
       tr
         td 
-          a(href="/" +map.mapfrom.maptype+ "/" )= map.mapfrom.maptype
+          a(href="/map/" +map.mapfrom.maptype+ "/" )= map.mapfrom.maptype
         td
-          a(href="/" +map.mapfrom.maptype+ "/" + map.mapfrom.address + "/")
+          a(href="/map/" +map.mapfrom.maptype+ "/" + map.mapfrom.address + "/")
             | #{map.mapfrom.address}
         td= map.mapto.maptype 
         td
           a(href='#')       
             | #{map.mapto.address}
         td
-          a(href="/" +map.mapfrom.maptype+ "/" + map.mapfrom.address)
+          a(href="/map/" +map.mapfrom.maptype+ "/" + map.mapfrom.address)
             button.btn.btn-xs.btn-primary
               | Details 
           |         

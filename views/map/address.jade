@@ -7,10 +7,13 @@ block content
 
   table.table
     tr
+      th Verified
       th Wallet Address
       th Actions
     each map, i in maps
       tr
+        td 
+          | #{map.mapfrom.verified}
         td
           +currencysymbol(map.mapto.maptype)
           | #{map.mapto.maptype}:#{map.mapto.address}

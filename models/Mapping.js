@@ -17,6 +17,10 @@ var mapSchema = new Schema({
     address: String, 
 
     proof: {
+      proof_type: {
+        type: String,
+        enum: ['oauth', 'closed-loop', 'url']
+      },
       url: String, // the URL of the public "proof" of the mapping ie. https://twitter.com/jimmy_wales/status/441634501265862657
       last_checked: { type: Date },
     },    
