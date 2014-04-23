@@ -1,3 +1,5 @@
+// YOU SHOULD NOT EDIT THIS FILE -- create a new one called secrets-local.js so that you don't store secrets in github
+
 console.log('Using secrets.');
 
 module.exports = {

@@ -96,7 +96,9 @@ app.use(function(req, res, next) {
 app.use(app.router);
 app.use(function(req, res) {
   res.status(404);
-  res.render('404');
+  res.render('404', {
+    title: 'Page Not Found'
+  });  
 });
 app.use(express.errorHandler());
 
@@ -146,9 +148,9 @@ app.get('/maps', mappingController.getMaps);
 app.get('/maps/new', mappingController.getNewmap);
 app.post('/maps/new', mappingController.postNewmap);
 
-app.get('/:maptype', mappingController.getMap);
-app.get('/:maptype/:address', mappingController.getAddress);
-app.get('/:maptype/:address/json', mappingController.getAddressJSON);
+//app.get('/:maptype', mappingController.getMap);
+//app.get('/:maptype/:address', mappingController.getAddress);
+//app.get('/:maptype/:address/json', mappingController.getAddressJSON);
 
 /**
  * OAuth routes for sign-in.
