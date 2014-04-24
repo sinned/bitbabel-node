@@ -3,7 +3,7 @@ extends ../layout
 block content
   if user && typeof(user.twitter) != 'undefined' && user.twitter
 
-    form.form-horizontal(id='inline-map-form-verified', method='POST')
+    form.form-horizontal(id='inline-map-form-verified', method='POST', action='/maps/new')
       input(type='hidden', name='_csrf', value=token)
       input(type='hidden', name='mapverified', value='true')
       input(type='hidden', name='mapfromtype', value='twitter')
