@@ -14,7 +14,7 @@ var secrets = process.env.NODE_ENV == 'local' ? require('../config/secrets-local
 exports.getLogin = function(req, res) {
   if (req.user) return res.redirect('/');
   res.render('account/login', {
-    title: 'Login'
+    title: 'Log in'
   });
 };
 

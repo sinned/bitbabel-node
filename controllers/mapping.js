@@ -117,7 +117,19 @@ exports.postNewmap = function(req, res) {
  * Delete a Map 
  */
 exports.deleteMap = function(req, res) {
-  var map_to_delete = req.body.mapid;
+  console.log('Deleting ' + req.params.mapid);
+
+  Mapping.remove({ _id: req.params.mapid }, function(err) {
+    if (err) {
+      req.flash('errors', { msg: 'Error deleting.' });
+      res.redirect('/maps');      
+    } else {
+      req.flash('success', { msg: 'Deleted.' });
+      res.redirect('/maps');      
+    }
+
+  });  
+
 };
 
 /**

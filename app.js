@@ -150,11 +150,12 @@ app.get('/maps', mappingController.getMaps);
 app.get('/maps/new', mappingController.getNewmap);
 app.post('/maps/new', mappingController.postNewmap);
 
+app.get('/map/delete/:mapid', mappingController.deleteMap);
+
 app.get('/map/:maptype', mappingController.getMap);
 app.get('/map/:maptype/:address', mappingController.getAddress);
 app.get('/map/:maptype/:address/json', mappingController.getAddressJSON);
 
-app.get('/map/:mapid/delete', mappingController.deleteMap);
 
 
 /**
