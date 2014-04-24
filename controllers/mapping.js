@@ -37,6 +37,11 @@ exports.getNewmap = function(req, res) {
   });
 };
 
+exports.validateMap = function(req, res, next) {
+  console.log('Validating Map');
+  return next();
+};
+
 /**
  * POST /new
  * Create Map 
@@ -88,7 +93,7 @@ exports.postNewmap = function(req, res) {
               title: 'New Map'
             });      
           } else {
-            req.flash('success', { msg: 'Yay! Wallet address mapped. ' });
+            req.flash('success', { msg: 'Wallet address mapped to verified Twitter name @' +reply.screen_name+ '. ' });
             res.redirect('/maps');      
           }
         });           

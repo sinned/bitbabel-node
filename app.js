@@ -148,7 +148,7 @@ app.get('/api/linkedin', passportConf.isAuthenticated, passportConf.isAuthorized
 /* mapping routes */
 app.get('/maps', mappingController.getMaps);
 app.get('/maps/new', mappingController.getNewmap);
-app.post('/maps/new', mappingController.postNewmap);
+app.post('/maps/new', mappingController.validateMap, mappingController.postNewmap);
 
 app.get('/map/delete/:mapid', mappingController.deleteMap);
 

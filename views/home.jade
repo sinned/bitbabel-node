@@ -2,7 +2,7 @@ extends layout
 
 block splash
   div.splash
-    div.container
+    div.container-fluid
       div.row
         h1 BitBabel - Your Cryptocurrency Address DNS
         p.lead
@@ -12,14 +12,16 @@ block splash
 
 
 block content
-
   div.container
     div.row
-      p
-        if !user
-          a.btn.btn-twitter.btn-social(href='/auth/twitter')
-            i.fa.fa-twitter
-            | Sign in with Twitter 
-        | 
-        a.btn.btn-success(href="/maps/new")
-         | Add a new Address Mapping  
+      if !user
+        div.col-md-3
+          p
+              a.btn.btn-twitter.btn-social(href='/auth/twitter')
+                i.fa.fa-twitter
+                | Sign in with Twitter 
+            | 
+      div.col-md-3
+        p        
+          a.btn.btn-success(href="/maps/new")
+           | Add a new Address Mapping  

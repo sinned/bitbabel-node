@@ -16,7 +16,7 @@ block content
           a(href="/map/" +map.mapfrom.maptype+ "/" )= map.mapfrom.maptype
         td
           a(href="/map/" +map.mapfrom.maptype+ "/" + map.mapfrom.address + "/")
-            | #{map.mapfrom.address}
+            | @#{map.mapfrom.address}
         td= map.mapto.maptype 
         td
           a(href='#')       
