@@ -150,6 +150,8 @@ app.get('/maps', mappingController.getMaps);
 app.get('/maps/new', mappingController.getNewmap);
 app.post('/maps/new', mappingController.validateMap, mappingController.postNewmap);
 
+app.get('/map/:maptype/new', mappingController.getNewTypedMap);
+
 app.get('/map/delete/:mapid', mappingController.deleteMap);
 
 app.get('/map/:maptype', mappingController.getMap);

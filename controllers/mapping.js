@@ -37,14 +37,64 @@ exports.getNewmap = function(req, res) {
   });
 };
 
+/**
+ * GET /new
+ * Start the create Map process
+ */
+exports.getNewTypedMap = function(req, res) {
+
+  var maptype = req.params.maptype;
+
+  console.log('TypedMap' + maptype);
+
+  if (res.locals.user && res.locals.user.twitter) {
+    
+    console.log('Creating Verified Mapping');
+
+    var token = _.findWhere(req.user.tokens, { kind: 'twitter' });
+    var T = new Twit({
+      consumer_key: secrets.twitter.consumerKey,
+      consumer_secret: secrets.twitter.consumerSecret,
+      access_token: token.accessToken,
+      access_token_secret: token.tokenSecret
+    });
+
+    T.get('account/verify_credentials', { }, function(err, reply) {
+      if (err) {
+        console.log('Error in map save', err);          
+      } else {
+        console.log(reply);
+        res.render('map/new-twitter', {
+          title: 'New TwitterMap',
+          maptype: maptype,
+          screenname: reply.screen_name
+        });        
+      }    
+    });
+  } else {
+    res.render('map/new-twitter', {
+      title: 'New TwitterMap'
+    });    
+  }
+};
+
+/**
+ * TODO: Validates map validity
+ * 
+ */
 exports.validateMap = function(req, res, next) {
   console.log('Validating Map');
-  return next();
+  if (true) {
+    return next();
+  }
+
+  req.flash('errors', { msg: 'ERROR. Invalid Map.' });
+  res.redirect('/maps/new');
 };
 
 /**
  * POST /new
- * Create Map 
+ * Create New Map 
  */
 exports.postNewmap = function(req, res) {
   var map = new Mapping({
