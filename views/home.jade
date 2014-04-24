@@ -14,24 +14,23 @@ block splash
 block content
   div.container
     div.row
-
-    div.row
-      div.col-md-1
+      div.col-md-2
         h4 Step 1
       div.col-md-4
           if !user
             p
-                a.btn.btn-twitter.btn-social.btn-block(href='/auth/twitter')
-                  i.fa.fa-twitter
-                  | Sign in with Twitter 
+              a.btn.btn-twitter.btn-social(href='/auth/twitter')
+                i.fa.fa-twitter
+                | Sign in with Twitter 
           else
             p
-                a.btn.btn-twitter.btn-social.btn-block(href='/auth/twitter')
-                  | Signed In!
+              a.btn.btn-twitter.btn-social(href='/auth/twitter')
+                i.fa.fa-twitter
+                | Signed In!
     div.row
-      div.col-md-1
+      div.col-md-2
         h4 Step 2
       div.col-md-4
         p        
-          a.btn.btn-success.btn-block(href="/map/twitter/new")
+          a.btn.btn-success(href="/map/twitter/new")
            | Map your Wallet Address to Your Twitter ID
