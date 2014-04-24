@@ -112,6 +112,13 @@ exports.postNewmap = function(req, res) {
   }
 };
 
+/**
+ * GET /map/:address/delete
+ * Delete a Map 
+ */
+exports.deleteMap = function(req, res) {
+  var map_to_delete = req.body.mapid;
+};
 
 /**
  * GET /:maptype

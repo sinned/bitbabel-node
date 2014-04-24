@@ -144,6 +144,8 @@ app.get('/api/venmo', passportConf.isAuthenticated, passportConf.isAuthorized, a
 app.post('/api/venmo', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.postVenmo);
 app.get('/api/linkedin', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.getLinkedin);
 
+
+/* mapping routes */
 app.get('/maps', mappingController.getMaps);
 app.get('/maps/new', mappingController.getNewmap);
 app.post('/maps/new', mappingController.postNewmap);
@@ -151,6 +153,9 @@ app.post('/maps/new', mappingController.postNewmap);
 app.get('/map/:maptype', mappingController.getMap);
 app.get('/map/:maptype/:address', mappingController.getAddress);
 app.get('/map/:maptype/:address/json', mappingController.getAddressJSON);
+
+app.get('/map/:mapid/delete', mappingController.deleteMap);
+
 
 /**
  * OAuth routes for sign-in.

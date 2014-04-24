@@ -16,6 +16,10 @@ block content
   div.container
     div.row
       p
-        a(href="/maps/new")
-          button.btn.btn-success
-           | Add a new Address Mapping  
+        if !user
+          a.btn.btn-twitter.btn-social(href='/auth/twitter')
+            i.fa.fa-twitter
+            | Sign in with Twitter 
+        | 
+        a.btn.btn-success(href="/maps/new")
+         | Add a new Address Mapping  
